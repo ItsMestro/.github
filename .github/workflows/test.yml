@@ -28,6 +28,7 @@ jobs:
         file:
           - default
           - renovate-config
+          - .github/renovate
 
     steps:
       - uses: actions/checkout@v6
