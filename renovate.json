@@ -1,0 +1,60 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "automergeType": "branch",
+  "commitBodyTable": true,
+  "configMigration": true,
+  "dependencyDashboard": true,
+  "extends": [
+    "config:recommended",
+    "abandonments:recommended",
+    ":maintainLockFilesWeekly",
+    ":semanticCommits",
+    ":semanticCommitScope(deps)",
+    "helpers:pinGitHubActionDigests",
+    ":pinDevDependencies"
+  ],
+  "labels": ["dependencies", "renovate"],
+  "minimumReleaseAge": "5 days",
+  "packageRules": [
+    {
+      "groupName": "github-actions",
+      "matchManagers": ["github-actions"]
+    },
+    {
+      "description": "Group prettier packages",
+      "matchPackageNames": ["prettier", "@prettier/*", "prettier-plugin-*"],
+      "groupName": "prettier packages"
+    },
+    {
+      "groupName": "node",
+      "matchDatasources": ["npm"],
+      "matchPackageNames": ["node", "@types/node"],
+      "rangeStrategy": "bump",
+      "versioning": "node"
+    },
+    {
+      "description": "Pin digests for dockerfile and docker-compose managers",
+      "matchManagers": ["dockerfile", "docker-compose"],
+      "matchDatasources": ["docker"],
+      "pinDigests": true
+    },
+    {
+      "description": "Group linter minor and patch updates",
+      "extends": ["packages:linters"],
+      "matchUpdateTypes": ["minor", "patch"],
+      "groupName": "linters"
+    },
+    {
+      "groupName": "typescript-projects",
+      "matchDatasources": ["npm"],
+      "matchPackageNames": ["!node", "!@types/node"],
+      "matchUpdateTypes": ["minor", "patch"]
+    }
+  ],
+  "platformAutomerge": true,
+  "postUpdateOptions": ["pnpmDedupe", "yarnDedupeHighest"],
+  "prCreation": "not-pending",
+  "rebaseWhen": "behind-base-branch",
+  "internalChecksFilter": "strict",
+  "schedule": "* * * * 1" // Mondays
+}
