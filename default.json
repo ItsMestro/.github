@@ -49,6 +49,11 @@
       "matchDatasources": ["npm"],
       "matchPackageNames": ["!node", "!@types/node"],
       "matchUpdateTypes": ["minor", "patch"]
+    },
+    {
+      "matchPackageNames": "ItsMestro/devtools",
+      "matchFileNames": ["**/.github/workflows/org-**"],
+      "enabled": false
     }
   ],
   "platformAutomerge": true,
