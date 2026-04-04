@@ -57,6 +57,10 @@
       "enabled": false
     }
   ],
+  "lockFileMaintenance": {
+    "enabled": true,
+    "automerge": true
+  },
   "platformAutomerge": true,
   "postUpdateOptions": ["pnpmDedupe", "yarnDedupeHighest"],
   "prCreation": "not-pending",
