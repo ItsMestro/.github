@@ -1,55 +1,29 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": [
+    "config:best-practices",
+    ":semanticCommits",
+    ":automergeDigest",
+    ":preserveSemverRanges"
+  ],
   "automergeType": "branch",
   "commitBodyTable": true,
-  "configMigration": true,
-  "dependencyDashboard": true,
-  "extends": [
-    "config:recommended",
-    "abandonments:recommended",
-    ":maintainLockFilesWeekly",
-    ":semanticCommits",
-    ":semanticCommitScope(deps)",
-    "helpers:pinGitHubActionDigests",
-    ":pinDevDependencies"
-  ],
   "labels": ["dependencies", "renovate"],
   "minimumReleaseAge": "5 days",
+  "schedule": "* * * * 1", // Mondays
+  "lockFileMaintenance": {
+    "automerge": true
+  },
+  "postUpdateOptions": ["pnpmDedupe", "yarnDedupeHighest", "npmDedupe"],
   "packageRules": [
     {
       "groupName": "github-actions",
       "matchManagers": ["github-actions"]
     },
     {
-      "description": "Pin digests for dockerfile and docker-compose managers",
-      "matchManagers": ["dockerfile", "docker-compose"],
-      "matchDatasources": ["docker"],
-      "pinDigests": true
-    },
-    {
-      "description": "Group linter minor and patch updates",
-      "extends": ["packages:linters"],
-      "matchUpdateTypes": ["minor", "patch"],
-      "groupName": "linters"
-    },
-    {
-      "groupName": "typescript-projects",
-      "matchDatasources": ["npm"],
-      "matchPackageNames": ["!node", "!@types/node"],
-      "matchUpdateTypes": ["minor", "patch"]
-    },
-    {
       "matchPackageNames": "ItsMestro/devtools",
       "matchFileNames": ["**/.github/workflows/org-**"],
       "enabled": false
     }
-  ],
-  "lockFileMaintenance": {
-    "enabled": true,
-    "automerge": true
-  },
-  "platformAutomerge": true,
-  "postUpdateOptions": ["pnpmDedupe", "yarnDedupeHighest"],
-  "internalChecksFilter": "strict",
-  "schedule": "* * * * 1" // Mondays
+  ]
 }
