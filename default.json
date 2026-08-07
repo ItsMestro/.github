@@ -11,8 +11,7 @@
     ":semanticCommits",
     ":semanticCommitScope(deps)",
     "helpers:pinGitHubActionDigests",
-    ":pinDevDependencies",
-    ":assignAndReview(ItsMestro)"
+    ":pinDevDependencies"
   ],
   "labels": ["dependencies", "renovate"],
   "minimumReleaseAge": "5 days",
@@ -20,18 +19,6 @@
     {
       "groupName": "github-actions",
       "matchManagers": ["github-actions"]
-    },
-    {
-      "description": "Group prettier packages",
-      "matchPackageNames": ["prettier", "@prettier/*", "prettier-plugin-*"],
-      "groupName": "prettier packages"
-    },
-    {
-      "groupName": "node",
-      "matchDatasources": ["npm"],
-      "matchPackageNames": ["node", "@types/node"],
-      "rangeStrategy": "bump",
-      "versioning": "node"
     },
     {
       "description": "Pin digests for dockerfile and docker-compose managers",
